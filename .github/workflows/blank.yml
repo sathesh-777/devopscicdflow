@@ -3,7 +3,7 @@ name: Deploy to Windows Server
 on:
   push:
     branches:
-      - main
+      - main  # Adjust branch name as per your setup
 
 jobs:
   deploy:
@@ -17,19 +17,20 @@ jobs:
         with:
           host: '13.232.131.235'
           username: 'Administrator'
-          password: '${{ secrets.SSH_PASSWORD }}'
+          password: '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$'  # Hardcoded password
           port: 22
-          timeout: '60s'  # Extended timeout for the connection
+          timeout: '60s'
           command_timeout: '10m'
+          debug: true  # To enable debugging and get detailed logs
 
       - name: Create directory on Windows Server
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no Administrator@13.232.131.235 "if not exist C:\\inetpub\\wwwroot mkdir C:\\inetpub\\wwwroot"
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh -o StrictHostKeyChecking=no Administrator@13.232.131.235 "if not exist C:\\inetpub\\wwwroot mkdir C:\\inetpub\\wwwroot"
 
       - name: Deploy files to Windows Server
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r ./* Administrator@13.232.131.235:C:/inetpub/wwwroot
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' scp -o StrictHostKeyChecking=no -r ./* Administrator@13.232.131.235:C:/inetpub/wwwroot
 
       - name: Verify Deployment
         run: |
-          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh Administrator@13.232.131.235 "dir C:\\inetpub\\wwwroot"
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh Administrator@13.232.131.235 "dir C:\\inetpub\\wwwroot"
