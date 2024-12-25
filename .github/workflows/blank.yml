@@ -1,0 +1,38 @@
+name: Deploy to Windows Server
+
+on:
+  push:
+    branches:
+      - main  # Adjust branch name as per your setup
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code using the most up-to-date action version
+      - uses: actions/checkout@v4
+
+      # Install sshpass more efficiently using setup-ssh-action
+      - name: Set up SSH
+        uses: appleboy/ssh-action@v0.1.0
+        with:
+          host: '13.232.131.235'
+          username: 'Administrator'
+          password: '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$'
+          port: 22
+
+      # Create the directory on Windows Server if it doesn't exist
+      - name: Create directory on Windows Server
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no Administrator@13.232.131.235 "if not exist C:\\inetpub\\wwwroot mkdir C:\\inetpub\\wwwroot"
+
+      # Deploy the files using scp with better security and performance
+      - name: Deploy files to Windows Server
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" scp -o StrictHostKeyChecking=no -r ./* Administrator@13.232.131.235:C:/inetpub/wwwroot
+
+      # Optional: Verify the deployment, e.g., by checking for specific files
+      - name: Verify Deployment
+        run: |
+          sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh Administrator@13.232.131.235 "dir C:\\inetpub\\wwwroot"
