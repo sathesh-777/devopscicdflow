@@ -25,12 +25,12 @@ jobs:
 
       - name: Create directory on Windows Server
         run: |
-          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh -o StrictHostKeyChecking=no Administrator@13.232.131.235 "if not exist C:\\inetpub\\wwwroot mkdir C:\\inetpub\\wwwroot"
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh -o StrictHostKeyChecking=no Administrator@13.235.132.136 "if not exist C:\\inetpub\\wwwroot mkdir C:\\inetpub\\wwwroot"
 
       - name: Deploy files to Windows Server
         run: |
-          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' scp -o StrictHostKeyChecking=no -r ./* Administrator@13.232.131.235:C:/inetpub/wwwroot
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' scp -o StrictHostKeyChecking=no -r ./* Administrator@13.235.132.136:C:/inetpub/wwwroot
 
       - name: Verify Deployment
         run: |
-          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh Administrator@13.232.131.235 "dir C:\\inetpub\\wwwroot"
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh Administrator@13.235.132.136"dir C:\\inetpub\\wwwroot"
