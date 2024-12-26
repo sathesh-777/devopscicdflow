@@ -33,4 +33,4 @@ jobs:
 
       - name: Verify Deployment
         run: |
-          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh Administrator@13.235.132.136"dir C:\\inetpub\\wwwroot"
+          sshpass -p '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$' ssh Administrator@13.235.132.136 " dir C:\\inetpub\\wwwroot"
