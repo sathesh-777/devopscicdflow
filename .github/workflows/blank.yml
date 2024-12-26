@@ -15,7 +15,7 @@ jobs:
       - name: Set up SSH
         uses: appleboy/ssh-action@v0.1.0
         with:
-          host: '13.232.131.235'
+          host: '13.235.132.136'
           username: 'Administrator'
           password: '5bg6tUy207U6lfYEgfozT9BQ4w)SzOq$'  # Hardcoded password
           port: 22
